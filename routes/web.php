@@ -7,6 +7,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/notification', 'UserNotificationController@index')->name('user.notification');
+Route::post('/notification/read', 'UserNotificationController@readNotification')->name('read.notification');
 
 Route::prefix('article')->group(function() {
     Route::get('create', 'ArticleController@create')->name('article.create');

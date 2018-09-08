@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\Notifications\ArticleCommentNotification;
 
 class CommentController extends Controller
 {
@@ -13,7 +14,12 @@ class CommentController extends Controller
             'body' => 'required'
         ]);
 
-       $article->comments()->create(array_merge($data, ['user_id' => $request->user()->id]));
+       $comment = $article->comments()->create(array_merge($data, ['user_id' => $request->user()->id]));
+
+        $comment->load('article','user');
+        $user = $article->user;
+
+        $user->notify(new ArticleCommentNotification($comment));
 
         return redirect()->back()->with('success','Comment added');
     }

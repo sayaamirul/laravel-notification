@@ -45,6 +45,7 @@
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             <li><a class="nav-link" href="{{ route('article.create') }}">Publish an Article</a></li>
+                            <li><a class="nav-link" href="{{ route('user.notification') }}">Notifications <span class="badge badge-info">{{ auth()->user()->unreadNotifications->count() }}</span></a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
